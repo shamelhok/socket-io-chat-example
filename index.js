@@ -9,17 +9,19 @@ const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
-
+let connectCounter=0
 io.on('connection', (socket) => {
   console.log('a user connected');
   socket.emit('chat message',`user connected, currently online${
-    Object.keys(io.sockets.connected).length}`)
+    connectCounter}`)
   socket.on('chat message', (msg) => {
     console.log('message: ' + msg);
     socket.emit('chat message', msg);
     socket.broadcast.emit('chat message', msg);
   });
   });
+
+io.on('disconnect', function() { connectCounter--; });
 
 server.listen(port, () => {
   console.log(`listening on *:${port}`);
