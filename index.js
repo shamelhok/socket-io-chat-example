@@ -13,6 +13,7 @@ let connectCounter=0
 io.on('connection', (socket) => {
   connectCounter++
   console.log('a user connected');
+  console.log({socket})
   socket.emit('chat message',`user connected, currently online${
     connectCounter}`)
   socket.on('chat message', (msg) => {
@@ -22,7 +23,9 @@ io.on('connection', (socket) => {
   });
   });
 
-io.on('disconnect', function() { connectCounter--; });
+io.on('disconnection', function() { 
+  console.log('user disconnected');
+  connectCounter--; });
 
 server.listen(port, () => {
   console.log(`listening on *:${port}`);
