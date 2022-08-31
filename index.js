@@ -11,12 +11,13 @@ app.get('/', (req, res) => {
 });
 io.on('connection', (socket) => {
   console.log('a user connected');
+  socket.emit('chat message','userconnected')
   socket.on('chat message', (msg) => {
     console.log('message: ' + msg);
-    io.emit('chat message', msg);
+    socket.emit('chat message', msg);
+    socket.broadcast.emit('chat message', msg);
   });
-  io.emit('some event', { someProperty: 'some value', otherProperty: 'other value' })
-});
+  });
 
 server.listen(port, () => {
   console.log(`listening on *:${port}`);
