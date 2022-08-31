@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
   console.log('a user connected');
   socket.emit('chat message',`user connected, currently online${
-    io.sockets.sockets.length}`)
+    Object.keys(io.sockets.connected).length}`)
   socket.on('chat message', (msg) => {
     console.log('message: ' + msg);
     socket.emit('chat message', msg);
