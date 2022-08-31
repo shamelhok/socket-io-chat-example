@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
-
+console.log('logged to console');
 io.on('connection', (socket) => {
   console.log('a user connected');
   socket.on('chat message', (msg) => {
