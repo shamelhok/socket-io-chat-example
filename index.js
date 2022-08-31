@@ -7,7 +7,6 @@ const io = new Server(server);
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-  console.log({res});
   res.sendFile(__dirname + '/index.html');
 });
 io.on('connection', (socket) => {
