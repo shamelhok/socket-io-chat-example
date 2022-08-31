@@ -25,16 +25,6 @@
   var socket = io();
   var form = document.getElementById('form');
   var input = document.getElementById('input');
-  console.log('log in html file');
-//   io.on('connection', (socket) => {
-//   console.log('a user connected');
-//   socket.on('chat message', (msg) => {
-//     console.log('message: ' + msg);
-//     io.emit('chat message', msg);
-//   });
-//   io.emit('some event', { someProperty: 'some value', otherProperty: 'other value' })
-// });
-
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     if (input.value) {
