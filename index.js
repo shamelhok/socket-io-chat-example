@@ -11,9 +11,14 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
   console.log('a user connected');
+  socket.on('chat message', (msg) => {
+    console.log('message: ' + msg);
+    io.emit('chat message', msg);
+  });
+  io.emit('some event', { someProperty: 'some value', otherProperty: 'other value' })
 });
 
-server.listen(4001, () => {
-  console.log('listening on *:4001');
+server.listen(3000, () => {
+  console.log('listening on *:3000');
 });
 module.exports=app
