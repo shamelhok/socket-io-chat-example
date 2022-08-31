@@ -12,12 +12,9 @@ app.get('/', (req, res) => {
 let connectCounter=0
 io.on('connection', (socket) => {
   connectCounter++
-  console.log('a user connected');
-  console.log({socket})
   socket.emit('chat message',`user connected, currently online${
     connectCounter}`)
   socket.on('chat message', (msg) => {
-    console.log('message: ' + msg);
     socket.emit('chat message', msg);
     socket.broadcast.emit('chat message', msg);
   });
